@@ -7,8 +7,8 @@ class User extends React.Component {
     const { token, handler } = this.props;
 
     if (token === "register") return <Register handler={handler} />;
-
-    if (token === false) return <Login handler={handler} />;
+    else if (token === false) return <Login handler={handler} />;
+    else return <div>Du bist erfolgreich eingeloggt!</div>;
   }
 }
 
