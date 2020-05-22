@@ -14,26 +14,14 @@ class Items extends React.Component {
     else this.setState({ fullItem: false });
   };
 
-  componentDidMount() {
-    if (this.props.start) {
-      const filterParam = encodeURIComponent(
-        JSON.stringify({
-          limit: 20,
-        })
-      );
-      connectAPI("ad/?filter=" + filterParam, "GET").then((e) => {
-        this.props.handler(e, true);
-      });
-    }
-  }
-
   render() {
+    const items = this.props.items;
     let fullItem = this.state.fullItem ? this.state.fullItem : false;
 
     return (
       <React.Fragment>
-        {this.props.items ? (
-          this.props.items.map((e) => (
+        {items ? (
+          items.map((e) => (
             <Item
               key={e.id}
               id={e.id}

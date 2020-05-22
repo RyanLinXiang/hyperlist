@@ -11,6 +11,7 @@ const connectAPI = async (extension, type, data = "") => {
   if (data) {
     dataobj.body = JSON.stringify(data);
   }
+
   const response = await fetch(url, dataobj);
 
   return response.json();

@@ -8,14 +8,15 @@ const Item = (props) => {
       <p className="title is-4">{title}</p>
       <p className="subtitle">
         {desc + " ... "}
-        <a
+        <button
           onClick={() => {
             handler(id);
           }}
-          className="readmore"
+          className="button is-small"
+          type="button"
         >
           read more
-        </a>
+        </button>
       </p>
     </div>
   );
