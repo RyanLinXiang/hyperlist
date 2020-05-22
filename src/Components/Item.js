@@ -1,13 +1,19 @@
 import React from "react";
 
 const Item = (props) => {
-  const { title, desc } = props;
+  const { id, title, desc, handler } = props;
+
   return (
     <div className="box">
       <p className="title is-4">{title}</p>
       <p className="subtitle">
         {desc + " ... "}
-        <a href="javascript:void(0);" className="readmore" data-id="">
+        <a
+          onClick={() => {
+            handler(id);
+          }}
+          className="readmore"
+        >
           read more
         </a>
       </p>

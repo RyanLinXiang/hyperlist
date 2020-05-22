@@ -3,7 +3,6 @@ import AddItem from "./Components/AddItem";
 import AddItemButton from "./Components/AddItemButton";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
-import FullItem from "./Components/FullItem";
 import Items from "./Components/Items";
 import LocSearch from "./Components/LocSearch";
 import Modals from "./Components/Modals";
@@ -59,7 +58,6 @@ class App extends React.Component {
         <Footer />
         <Modals token={this.state.token}>
           <Message />
-          <FullItem />
           <AddItem />
         </Modals>
       </React.Fragment>
