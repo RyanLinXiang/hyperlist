@@ -9,7 +9,11 @@ import Search from "./Components/Search";
 import User from "./Components/User";
 
 class App extends React.Component {
-  state = { token: false, items: false };
+  state = {
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYzg5YjgxYWRhOGIxMDA0NDg1NjdmZCIsIm5hbWUiOiJMaW4iLCJpYXQiOjE1OTAyMDUzNDksImV4cCI6MTU5MDgxMDE0OX0.pB3pwP2bbQ2Q7sRwu9TmhcPYRziZshvY07s4Yej7qs0",
+    items: false,
+  };
   start = true;
 
   handlerShowItems = (items, start) => {
@@ -22,7 +26,9 @@ class App extends React.Component {
   };
 
   render() {
-    if (!this.state.items.length && this.start) {
+    const { items, token } = this.state;
+
+    if (!items.length && this.start) {
       const filterParam = encodeURIComponent(
         JSON.stringify({
           limit: 20,
@@ -43,18 +49,22 @@ class App extends React.Component {
                 <Search handler={this.handlerShowItems} />
               </div>
               <div className="column is-narrow">
-                <AddItem handler={this.handlerShowItems} />
+                <AddItem handler={this.handlerShowItems} token={token} />
               </div>
             </div>
 
             <div className="columns is-centered">
               <div className="column is-narrow">
-                <User token={this.state.token} handler={this.handlerUser} />
+                <User
+                  token={token}
+                  handlerUser={this.handlerUser}
+                  handlerShowItems={this.handlerShowItems}
+                />
                 <p>&nbsp;</p>
                 <LocSearch handler={this.handlerShowItems} />
               </div>
               <div className="column">
-                <Items items={this.state.items} token={this.state.token} />
+                <Items items={items} token={token} />
               </div>
             </div>
           </div>

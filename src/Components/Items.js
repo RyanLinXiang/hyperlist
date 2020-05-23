@@ -20,19 +20,17 @@ class Items extends React.Component {
 
     return (
       <React.Fragment>
-        {items ? (
-          items.map((e) => (
-            <Item
-              key={e.id}
-              id={e.id}
-              title={e.title}
-              desc={e.description.substring(0, 99)}
-              handler={this.handlerShowFull}
-            />
-          ))
-        ) : (
-          <Item />
-        )}
+        {items
+          ? items.map((e) => (
+              <Item
+                key={e.id}
+                id={e.id}
+                title={e.title}
+                desc={e.description.substring(0, 99)}
+                handler={this.handlerShowFull}
+              />
+            ))
+          : null}
         {fullItem ? (
           <FullItem {...fullItem} handler={this.handlerShowFull} />
         ) : null}

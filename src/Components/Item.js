@@ -9,9 +9,7 @@ const Item = (props) => {
       <p className="subtitle">
         {desc + " ... "}
         <button
-          onClick={() => {
-            handler(id);
-          }}
+          onClick={handler.bind(this, id)}
           className="button is-small"
           type="button"
         >

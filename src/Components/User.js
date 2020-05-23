@@ -1,14 +1,29 @@
 import React from "react";
+import connectAPI from "./api";
 import Register from "./Register";
 import Login from "./Login";
+import UserFeatures from "./UserFeatures";
 
 class User extends React.Component {
-  render() {
-    const { token, handler } = this.props;
+  state = { name: false };
 
-    if (token === "register") return <Register handler={handler} />;
-    else if (token === false) return <Login handler={handler} />;
-    else return <div>Du bist erfolgreich eingeloggt!</div>;
+  render() {
+    const { token, handlerUser, handlerShowItems } = this.props;
+
+    connectAPI("user/me", "GET", false, token).then((e) => {
+      this.setState({ name: e.name });
+    });
+
+    if (token === "register") return <Register handler={handlerUser} />;
+    else if (token === false) return <Login handler={handlerUser} />;
+    else
+      return (
+        <UserFeatures
+          name={this.state.name}
+          handlerUser={handlerUser}
+          handlerShowItems={handlerShowItems}
+        />
+      );
   }
 }
 

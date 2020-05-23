@@ -25,9 +25,7 @@ const FullItem = (props) => {
           <button
             className="delete"
             aria-label="close"
-            onClick={() => {
-              handler(false);
-            }}
+            onClick={handler.bind(this, false)}
           ></button>
         </header>
         <section className="modal-card-body">

@@ -24,7 +24,7 @@ class AddItem extends React.Component {
         </button>
       </div>
     ) : (
-      <AddItemForm handler={this.handlerToggleForm} />
+      <AddItemForm token={this.props.token} handler={this.handlerToggleForm} />
     );
   }
 }

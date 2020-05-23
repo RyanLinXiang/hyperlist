@@ -1,4 +1,4 @@
-const connectAPI = async (extension, type, data = "") => {
+const connectAPI = async (extension, type, data = "", token = false) => {
   const url = "https://awacademy-kleinanzeigen.azurewebsites.net/" + extension;
 
   const dataobj = {
@@ -8,9 +8,9 @@ const connectAPI = async (extension, type, data = "") => {
     },
   };
 
-  if (data) {
-    dataobj.body = JSON.stringify(data);
-  }
+  if (token) dataobj.headers["Authorization"] = `Bearer ${token}`;
+
+  if (data) dataobj.body = JSON.stringify(data);
 
   const response = await fetch(url, dataobj);
 
