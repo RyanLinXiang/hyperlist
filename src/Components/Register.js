@@ -75,8 +75,7 @@ class Register extends React.Component {
             </button>{" "}
             <button
               className="button is-info"
-              // onClick={this.props.handler.bind(this, false)}
-  
+              onClick={this.props.handler.bind(this, false)}
             >
               Login
             </button>
