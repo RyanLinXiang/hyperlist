@@ -11,10 +11,10 @@ const connectAPI = async (extension, type, data = "", token = false) => {
   if (token) dataobj.headers["Authorization"] = `Bearer ${token}`;
 
   if (data) dataobj.body = JSON.stringify(data);
-
+  console.log(dataobj);
   const response = await fetch(url, dataobj);
 
-  return response.json();
+  return response.statusText === "No Content" ? {} : response.json();
 };
 
 export default connectAPI;
