@@ -1,25 +1,16 @@
 import React from "react";
-import connectAPI from "./api";
 
 const UserFeatures = (props) => {
-  const { userid, username, token, handlerUser, handlerShowItems } = props;
+  const { userid, username, handlerUser, handlerShowItems } = props;
 
   const handlerUserFeature = (feature) => {
     if (feature === "ads") {
-      const filterParam = encodeURIComponent(
-        JSON.stringify({
-          limit: 20,
-          where: { userId: userid },
-        })
-      );
-      connectAPI("ad/?filter=" + filterParam, "GET", false, token).then((e) => {
-        handlerShowItems(e);
+      handlerShowItems("default", {
+        limit: 20,
+        where: { userId: userid },
       });
-    }
-    if (feature === "favs") {
-      connectAPI("user/me/saved-ad", "GET", false, token).then((e) => {
-        handlerShowItems(e);
-      });
+    } else if (feature === "favs") {
+      handlerShowItems("myfavs", false);
     }
   };
 

@@ -17,8 +17,34 @@ class App extends React.Component {
     items: false,
   };
 
-  handlerShowItems = (items) => {
-    this.setState({ items: items });
+  currentAPIView = "default";
+  currentAPIHelperData = false;
+
+  handlerShowItems = (view, helperData) => {
+    let extension;
+    let type;
+    let token = this.state.token;
+    let data = false;
+
+    if (view === "current") {
+      view = this.currentAPIView;
+      helperData = this.currentAPIHelperData;
+    }
+
+    if (view === "default") {
+      extension =
+        "ad/?filter=" + encodeURIComponent(JSON.stringify(helperData));
+      type = "GET";
+    } else if (view === "myfavs") {
+      extension = "user/me/saved-ad";
+      type = "GET";
+    }
+
+    connectAPI(extension, type, data, token).then((e) => {
+      this.setState({ items: e });
+      this.currentAPIView = view;
+      this.currentAPIHelperData = helperData;
+    });
   };
 
   handlerUser = (token, userid, username) => {
@@ -29,13 +55,8 @@ class App extends React.Component {
     const { token, userid, username, items } = this.state;
 
     if (!items.length) {
-      const filterParam = encodeURIComponent(
-        JSON.stringify({
-          limit: 20,
-        })
-      );
-      connectAPI("ad/?filter=" + filterParam, "GET").then((e) => {
-        this.handlerShowItems(e);
+      this.handlerShowItems("default", {
+        limit: 20,
       });
     }
 
@@ -53,7 +74,8 @@ class App extends React.Component {
                   <FormControl
                     handlerForRefreshHomepage={this.handlerShowItems.bind(
                       this,
-                      false
+                      "current",
+                      this.currentAPIHelperData
                     )}
                     token={token}
                     showaddbutton={true}
@@ -81,7 +103,8 @@ class App extends React.Component {
                   userid={userid}
                   handlerForRefreshHomepage={this.handlerShowItems.bind(
                     this,
-                    false
+                    "current",
+                    this.currentAPIHelperData
                   )}
                 />
               </div>
