@@ -12,7 +12,7 @@ const Header = () => {
       <div className="hero-body">
         <div className="container">
           <h1 className="title">
-            <a href="localhost:3000">HyperList</a>
+            <a href="http://localhost:3000">HyperList</a>
           </h1>
           <br />
           <h2 className="subtitle">by Osama | Ricky | Lin</h2>

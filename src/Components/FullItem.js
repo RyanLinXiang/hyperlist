@@ -1,6 +1,10 @@
 import React from "react";
+import Favorite from "./Favorite";
+import FormControl from "./FormControl";
+
 const FullItem = (props) => {
   const {
+    id,
     createdAt,
     title,
     description,
@@ -9,7 +13,12 @@ const FullItem = (props) => {
     email,
     price,
     priceNegotiable,
-    handler,
+    handlerForRefreshHomepage,
+    handlerForCloseFull,
+    handlerToggleFav,
+    favcolor,
+    showeditbutton,
+    token,
   } = props;
 
   const dayspast = Math.round(
@@ -21,11 +30,25 @@ const FullItem = (props) => {
       <div className="modal-background"></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">{title}</p>
+          <div className="modal-card-title">
+            {title}{" "}
+            <Favorite
+              handlerToggleFav={handlerToggleFav.bind(this, id)}
+              favcolor={favcolor}
+            />
+            <FormControl
+              id={id}
+              showeditbutton={showeditbutton}
+              handlerForCloseFull={handlerForCloseFull}
+              handlerForRefreshHomepage={handlerForRefreshHomepage}
+              token={token}
+              closingbehavior={false} // Don't close Edit Form if it was called from a Full Item Page
+            />
+          </div>
           <button
             className="delete"
             aria-label="close"
-            onClick={handler.bind(this, false)}
+            onClick={handlerForCloseFull}
           ></button>
         </header>
         <section className="modal-card-body">

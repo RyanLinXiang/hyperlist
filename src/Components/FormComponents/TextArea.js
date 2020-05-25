@@ -1,6 +1,7 @@
 import React from "react";
 const TextArea = (props) => {
-  const { id, label, placeholder } = props;
+  const { id, label, placeholder, value, handlerChange } = props;
+  const content = value ? value : "";
 
   return (
     <div className="field">
@@ -10,6 +11,8 @@ const TextArea = (props) => {
           className="textarea"
           id={id}
           placeholder={placeholder}
+          value={content}
+          onChange={handlerChange}
         ></textarea>
       </div>
     </div>

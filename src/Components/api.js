@@ -14,7 +14,7 @@ const connectAPI = async (extension, type, data = "", token = false) => {
 
   const response = await fetch(url, dataobj);
 
-  return response.json();
+  return response.statusText === "No Content" ? {} : response.json();
 };
 
 export default connectAPI;

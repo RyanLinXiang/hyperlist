@@ -1,0 +1,15 @@
+.yellow {
+  color: yellow;
+}
+
+.grey {
+  color: grey;
+}
+
+.yellow.favorite:hover {
+  color: grey;
+}
+
+.grey.favorite:hover {
+  color: yellow;
+}
