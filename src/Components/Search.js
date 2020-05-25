@@ -5,22 +5,20 @@ import connectAPI from "./api";
 class Search extends React.Component {
 
   handlerSubmit= (e)=> {
-    console.log("Hello")
     e.preventDefault()
     let keyWord = e.target.search.value
     var searchRequest = {
-      "limit": "20",
-      "offset": "0",
-      "where": {
-        "and": [
-          { "title": { "like": keyWord, "options": "i" } }
+      limit: 20,
+      offset: 0,
+      where: {
+        and: [
+          { title: { like: keyWord, options: "i" } }
 
 
         ]
       }
     };
-    console.log(searchRequest)
-    connectAPI("/ad?filter="+ encodeURIComponent(JSON.stringify(searchRequest)), "GET").then(e => {console.log(e);this.props.handler(e)})
+   this.props.handler("default", searchRequest)
    
   }
 
