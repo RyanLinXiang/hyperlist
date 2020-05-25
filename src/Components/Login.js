@@ -5,38 +5,24 @@ import connectAPI from "./api";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: '',
-      password: ''
-    };
-
+    this.state = {email: '',password: ''};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
   };
-
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
     console.log(this.state);
   }
-
   handleSubmit(e) {
-    console.log('hello');
     e.preventDefault();
-    //TODO: HANDLE TOKEN 
     connectAPI('/user/login','POST',{email: e.target.email.value, password: e.target.password.value}).then((e) => {
-
       this.props.handler(e.token)
-      // console.log(e);
       
     });
   };
-
   render() {
-
     return (
       <form onSubmit={this.handleSubmit}>
-
         <div className="field">
           <p className="control has-icons-left has-icons-right">
             <input className="input" type="email" placeholder="Email"  name='email' id='email' value={this.state.email} onChange={this.handleChange} />
@@ -48,7 +34,6 @@ class Login extends React.Component {
             </span>
           </p>
         </div>
-
         <div className="field">
           <p className="control has-icons-left">
             <input className="input" type="password" placeholder="Password" name='password' id='password' value={this.state.password} onChange={this.handleChange} />
@@ -57,7 +42,6 @@ class Login extends React.Component {
             </span>
           </p>
         </div>
-
         <div className="field">
           <p className="control">
             <button type="submit" className="button is-info">
@@ -75,5 +59,4 @@ class Login extends React.Component {
     );
   }
 }
-
 export default Login;
