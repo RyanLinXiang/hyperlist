@@ -25,23 +25,23 @@ const UserFeatures = (props) => {
 
   return (
     <div className="box">
-      <div className="content">Wilkommen {username}!</div>
+      <div className="content">Welcome {username}!</div>
       <aside className="menu">
-        <p className="menu-label">Persönliche Features:</p>
+        <p className="menu-label">Personal features:</p>
         <ul className="menu-list">
           <li>
             <a href="# " onClick={handlerUserFeature.bind(this, "ads")}>
-              Meine Anzeigen
+              my Ads
             </a>
           </li>
           <li>
             <a href="# " onClick={handlerUserFeature.bind(this, "favs")}>
-              Meine Merkliste
+              my Favorites
             </a>
           </li>
           <li>
             <a href="# " onClick={handlerUserFeature.bind(this, "messages")}>
-              Meine Nachrichten
+              my Messages
             </a>
           </li>
         </ul>

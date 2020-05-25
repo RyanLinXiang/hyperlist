@@ -196,7 +196,7 @@ class FormControl extends React.Component {
           type="button"
           onClick={this.handlerToggleForm.bind(this, false, false)}
         >
-          Add New Article
+          Add a New Ad
         </button>
       );
     else return null;
