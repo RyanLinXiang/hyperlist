@@ -1,6 +1,9 @@
 import React from "react";
 const Message = (props) => {
   const { handler, classname, message } = props;
+  const handlerFinalConfirm = props.handlerFinalConfirm
+    ? props.handlerFinalConfirm
+    : false;
 
   return (
     <div className="modal is-active" style={{ zIndex: "100" }} id="message">
@@ -18,6 +21,15 @@ const Message = (props) => {
             ></button>
           </div>
           <div className="message-body">{message}</div>
+          {handlerFinalConfirm ? (
+            <button
+              type="button"
+              className="button is-danger"
+              onClick={handlerFinalConfirm}
+            >
+              Yes
+            </button>
+          ) : null}
         </article>
       </div>
     </div>

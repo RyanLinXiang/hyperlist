@@ -62,6 +62,13 @@ class FormControl extends React.Component {
     this.setState({ formContents: formContents });
   };
 
+  handlerDelete = (event) => {
+    const { id, token } = this.props;
+    connectAPI("ad/" + id, "DELETE", token).then((item) => {
+      this.handlerToggleForm(true, true);
+    });
+  };
+
   handlerSubmitForm = (event) => {
     event.preventDefault();
     let allRequiredFilled = true;
@@ -176,6 +183,7 @@ class FormControl extends React.Component {
             handlerChange={this.handlerChange}
             formcontents={this.state.formContents}
             closingbehavior={closingbehavior}
+            handlerDelete={this.handlerDelete}
           />
         </React.Fragment>
       );

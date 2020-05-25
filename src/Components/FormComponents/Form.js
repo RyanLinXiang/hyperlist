@@ -2,6 +2,7 @@ import React from "react";
 import Input from "./Input";
 import TextArea from "./TextArea";
 import CheckBox from "./CheckBox";
+import Delete from "./Delete";
 
 const Form = (props) => {
   const {
@@ -12,6 +13,7 @@ const Form = (props) => {
     handlerFeedback,
     handlerReset,
     handlerChange,
+    handlerDelete,
     closingbehavior,
   } = props;
 
@@ -96,6 +98,7 @@ const Form = (props) => {
             >
               Reset
             </button>
+            <Delete handler={handlerDelete} />
           </footer>
         </div>
       </div>
