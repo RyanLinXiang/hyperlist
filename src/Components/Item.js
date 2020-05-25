@@ -1,10 +1,13 @@
 import React from "react";
 import Favorite from "./Favorite";
 import FormControl from "./FormControl";
+import Messenger from "./Messenger";
 
 const Item = (props) => {
   const {
     id,
+    adUserId,
+    userid,
     title,
     description,
     handlerShowFull,
@@ -27,19 +30,25 @@ const Item = (props) => {
         >
           read more
         </button>
+        {token ? (
+          <React.Fragment>
+            <Favorite
+              handlerToggleFav={handlerToggleFav.bind(this, id)}
+              favcolor={favcolor}
+            />
 
-        <Favorite
-          handlerToggleFav={handlerToggleFav.bind(this, id)}
-          favcolor={favcolor}
-        />
-
-        <FormControl
-          id={id}
-          handlerForRefreshHomepage={handlerForRefreshHomepage}
-          showeditbutton={showeditbutton}
-          token={token}
-          closingbehavior={true}
-        />
+            <FormControl
+              id={id}
+              handlerForRefreshHomepage={handlerForRefreshHomepage}
+              showeditbutton={showeditbutton}
+              token={token}
+              closingbehavior={true}
+            />
+            {userid !== adUserId ? (
+              <Messenger id={id} adUserId={adUserId} />
+            ) : null}
+          </React.Fragment>
+        ) : null}
       </div>
     </div>
   );

@@ -67,6 +67,8 @@ class Items extends React.Component {
                 <Item
                   key={e.id}
                   id={e.id}
+                  adUserId={e.userId}
+                  userid={userid}
                   title={e.title}
                   description={e.description.substring(0, 99)}
                   handlerShowFull={this.handlerShowFull}

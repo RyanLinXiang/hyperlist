@@ -35,6 +35,12 @@ const UserFeatures = (props) => {
               my Messages
             </a>
           </li>
+          <li>
+            <ul>
+              <li>Inbox</li>
+              <li>Sent</li>
+            </ul>
+          </li>
         </ul>
         <p>&nbsp;</p>
         <p className="has-text-centered">
