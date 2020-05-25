@@ -19,12 +19,14 @@ class App extends React.Component {
 
   currentAPIView = "default";
   currentAPIHelperData = false;
+  messageItems = false;
 
   handlerShowItems = (view, helperData) => {
     let extension;
     let type;
     let token = this.state.token;
     let data = false;
+    this.messageItems = false;
 
     if (view === "current") {
       view = this.currentAPIView;
@@ -38,9 +40,20 @@ class App extends React.Component {
     } else if (view === "myfavs") {
       extension = "user/me/saved-ad";
       type = "GET";
+    } else if (view === "messagesInbox" || view === "messagesSent") {
+      extension = "user/me/conversations";
+      type = "GET";
+      this.messageItems = true;
     }
 
     connectAPI(extension, type, data, token).then((e) => {
+      if (view === "messagesInbox")
+        e = e.filter(
+          (e) => e.latestMessage.recipientUserId === this.state.userid
+        );
+      else if (view === "messagesSent")
+        e = e.filter((e) => e.latestMessage.senderUserId === this.state.userid);
+
       this.setState({ items: e });
       this.currentAPIView = view;
       this.currentAPIHelperData = helperData;
@@ -106,6 +119,7 @@ class App extends React.Component {
                     "current",
                     this.currentAPIHelperData
                   )}
+                  messageItems={this.messageItems}
                 />
               </div>
             </div>

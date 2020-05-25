@@ -2,6 +2,7 @@ import React from "react";
 import connectAPI from "./api";
 import Item from "./Item";
 import FullItem from "./FullItem";
+import MessageItem from "./MessageItem";
 import "./workaround.css"; // Bulma/React Bug with Icons and different styles applied
 
 class Items extends React.Component {
@@ -47,7 +48,13 @@ class Items extends React.Component {
   };
 
   render() {
-    const { items, token, userid, handlerForRefreshHomepage } = this.props;
+    const {
+      items,
+      token,
+      userid,
+      handlerForRefreshHomepage,
+      messageItems,
+    } = this.props;
     const fullItem = this.state.fullItem ? this.state.fullItem : false;
     let colorclass, myAd;
     const favAds = this.state.favAds;
@@ -55,6 +62,7 @@ class Items extends React.Component {
       colorclass = favAds.includes(fullItem.id) ? "yellow" : "grey";
       myAd = fullItem.userId === userid ? true : false;
     }
+    const showmessenger = fullItem.userId !== userid ? true : false;
 
     return (
       <React.Fragment>
@@ -63,32 +71,42 @@ class Items extends React.Component {
               const colorclass = favAds.includes(e.id) ? "yellow" : "grey";
               const myAd = e.userId === userid ? true : false;
 
-              return (
-                <Item
-                  key={e.id}
-                  id={e.id}
-                  adUserId={e.userId}
-                  userid={userid}
-                  title={e.title}
-                  description={e.description.substring(0, 99)}
-                  handlerShowFull={this.handlerShowFull}
-                  handlerToggleFav={this.handlerToggleFav}
-                  handlerForRefreshHomepage={handlerForRefreshHomepage}
-                  showeditbutton={myAd}
-                  favcolor={colorclass}
-                  token={token}
-                />
-              );
+              if (!messageItems)
+                return (
+                  <Item
+                    key={e.id}
+                    id={e.id}
+                    title={e.title}
+                    description={e.description.substring(0, 99)}
+                    handlerShowFull={this.handlerShowFull.bind(this, e.id)}
+                    handlerToggleFav={this.handlerToggleFav.bind(this, e.id)}
+                    handlerForRefreshHomepage={handlerForRefreshHomepage}
+                    showeditbutton={myAd}
+                    favcolor={colorclass}
+                    token={token}
+                  />
+                );
+              else
+                return (
+                  <MessageItem
+                    id={e.adId}
+                    key={e.adId + e.latestMessage.createdAt}
+                    messageText={e.latestMessage.text}
+                    createdAt={e.latestMessage.createdAt}
+                    handler={this.handlerShowFull}
+                  />
+                );
             })
           : null}
         {fullItem ? (
           <FullItem
             {...fullItem}
             handlerForCloseFull={this.handlerShowFull.bind(this, false)}
-            handlerToggleFav={this.handlerToggleFav}
+            handlerToggleFav={this.handlerToggleFav.bind(this, fullItem.id)}
             handlerForRefreshHomepage={handlerForRefreshHomepage}
             favcolor={colorclass}
             showeditbutton={myAd}
+            showmessenger={showmessenger}
             token={token}
           />
         ) : null}

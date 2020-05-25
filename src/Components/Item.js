@@ -1,13 +1,10 @@
 import React from "react";
 import Favorite from "./Favorite";
 import FormControl from "./FormControl";
-import Messenger from "./Messenger";
 
 const Item = (props) => {
   const {
     id,
-    adUserId,
-    userid,
     title,
     description,
     handlerShowFull,
@@ -24,7 +21,7 @@ const Item = (props) => {
       <div className="subtitle">
         {description + " ... "}
         <button
-          onClick={handlerShowFull.bind(this, id, false)}
+          onClick={handlerShowFull}
           className="button is-small"
           type="button"
         >
@@ -32,10 +29,7 @@ const Item = (props) => {
         </button>
         {token ? (
           <React.Fragment>
-            <Favorite
-              handlerToggleFav={handlerToggleFav.bind(this, id)}
-              favcolor={favcolor}
-            />
+            <Favorite handlerToggleFav={handlerToggleFav} favcolor={favcolor} />
 
             <FormControl
               id={id}
@@ -44,9 +38,6 @@ const Item = (props) => {
               token={token}
               closingbehavior={true}
             />
-            {userid !== adUserId ? (
-              <Messenger id={id} adUserId={adUserId} />
-            ) : null}
           </React.Fragment>
         ) : null}
       </div>

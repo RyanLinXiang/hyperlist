@@ -11,6 +11,10 @@ const UserFeatures = (props) => {
       });
     } else if (feature === "favs") {
       handlerShowItems("myfavs", false);
+    } else if (feature === "messagesInbox") {
+      handlerShowItems("messagesInbox", false);
+    } else if (feature === "messagesSent") {
+      handlerShowItems("messagesSent", false);
     }
   };
 
@@ -18,7 +22,7 @@ const UserFeatures = (props) => {
     <div className="box">
       <div className="content">Welcome {username}!</div>
       <aside className="menu">
-        <p className="menu-label">Personal features:</p>
+        <p className="menu-label">Personal views:</p>
         <ul className="menu-list">
           <li>
             <a href="# " onClick={handlerUserFeature.bind(this, "ads")}>
@@ -30,18 +34,27 @@ const UserFeatures = (props) => {
               my Favorites
             </a>
           </li>
+        </ul>
+        <p className="menu-label">my Messages:</p>
+        <ul className="menu-list">
           <li>
-            <a href="# " onClick={handlerUserFeature.bind(this, "messages")}>
-              my Messages
+            <a
+              href="# "
+              onClick={handlerUserFeature.bind(this, "messagesInbox")}
+            >
+              Inbox
             </a>
           </li>
           <li>
-            <ul>
-              <li>Inbox</li>
-              <li>Sent</li>
-            </ul>
+            <a
+              href="# "
+              onClick={handlerUserFeature.bind(this, "messagesSent")}
+            >
+              Sent
+            </a>
           </li>
         </ul>
+
         <p>&nbsp;</p>
         <p className="has-text-centered">
           <button
