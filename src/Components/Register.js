@@ -30,6 +30,7 @@ class Register extends React.Component {
     //TODO: HANDLE TOKEN 
     connectAPI('/user/register', 'POST', this.state).then((e) => {
       console.log(e)
+      this.props.handler(false,false,false) //Sicherheitsstufe
     });
 
   }
@@ -41,9 +42,9 @@ class Register extends React.Component {
 
       <form onSubmit={this.handleSubmit}>
 
-        <div class="field">
-          <div class="control">
-            <input class="input" type="text" placeholder="Name" name='name' value={this.state.name} onChange={this.handleChange} />
+        <div className="field">
+          <div className="control">
+            <input className="input" type="text" placeholder="Name" name='name' value={this.state.name} onChange={this.handleChange} />
           </div>
         </div>
   

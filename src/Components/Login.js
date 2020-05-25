@@ -21,20 +21,25 @@ class Login extends React.Component {
   }
 
   handleSubmit(e) {
+    console.log('hello');
+    e.preventDefault();
     //TODO: HANDLE TOKEN 
-    connectAPI('/user/login', 'POST', this.state).then((e) => {
-      console.log(e)
+    connectAPI('/user/login','POST',{email: e.target.email.value, password: e.target.password.value}).then((e) => {
+
+      this.props.handler(e.token)
+      // console.log(e);
+      
     });
   };
 
   render() {
 
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
 
         <div className="field">
           <p className="control has-icons-left has-icons-right">
-            <input className="input" type="email" placeholder="Email"  name='email' value={this.state.email} onChange={this.handleChange} />
+            <input className="input" type="email" placeholder="Email"  name='email' id='email' value={this.state.email} onChange={this.handleChange} />
             <span className="icon is-small is-left">
               <i className="fas fa-envelope"></i>
             </span>
@@ -46,7 +51,7 @@ class Login extends React.Component {
 
         <div className="field">
           <p className="control has-icons-left">
-            <input className="input" type="password" placeholder="Password" name='password' value={this.state.password} onChange={this.handleChange} />
+            <input className="input" type="password" placeholder="Password" name='password' id='password' value={this.state.password} onChange={this.handleChange} />
             <span className="icon is-small is-left">
               <i className="fas fa-lock"></i>
             </span>

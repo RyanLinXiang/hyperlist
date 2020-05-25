@@ -1,6 +1,8 @@
 const connectAPI = async (extension, type, data = "") => {
   const url = "https://awacademy-kleinanzeigen.azurewebsites.net/" + extension;
 
+  console.log(type,extension, data)
+  
   const dataobj = {
     method: type,
     headers: {
@@ -11,6 +13,7 @@ const connectAPI = async (extension, type, data = "") => {
   if (data) {
     dataobj.body = JSON.stringify(data);
   }
+  console.log('Hello',dataobj)
   const response = await fetch(url, dataobj);
 
   return response.json();
