@@ -186,6 +186,7 @@ class FormControl extends React.Component {
             formcontents={this.state.formContents}
             closingbehavior={closingbehavior}
             handlerDelete={this.handlerDelete}
+            editmode={showeditbutton}
           />
         </React.Fragment>
       );

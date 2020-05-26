@@ -27,7 +27,7 @@ class MessageItem extends React.Component {
       createdAt,
       handlerShowFull,
       token,
-      showMessenger,
+      showmessenger,
     } = this.props;
 
     const senderUserName = this.state.senderUserName;
@@ -43,7 +43,7 @@ class MessageItem extends React.Component {
           >
             Full Ad
           </button>{" "}
-          {showMessenger ? (
+          {showmessenger ? (
             <button
               onClick={this.handlerToggleInput}
               className="button is-small"

@@ -15,6 +15,7 @@ const Form = (props) => {
     handlerChange,
     handlerDelete,
     closingbehavior,
+    editmode,
   } = props;
 
   return (
@@ -98,7 +99,7 @@ const Form = (props) => {
             >
               Reset
             </button>
-            {token ? <Delete handler={handlerDelete} /> : null}
+            {token && editmode ? <Delete handler={handlerDelete} /> : null}
           </footer>
         </div>
       </div>
