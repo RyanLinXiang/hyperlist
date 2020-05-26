@@ -32,7 +32,7 @@ const FullItem = (props) => {
         <div className="modal-card">
           <header className="modal-card-head">
             <div className="modal-card-title">
-              {title}{" "}
+              {title.length > 50 ? title.substring(0, 50) + "..." : title}{" "}
               {token && token !== "register" ? (
                 <Favorite
                   handlerToggleFav={handlerToggleFav}
@@ -65,7 +65,11 @@ const FullItem = (props) => {
               <div className="level-item has-text-centered">
                 <div>
                   <p className="heading">Loc</p>
-                  <p className="title">{location}</p>
+                  <p className="title">
+                    {location.length > 10
+                      ? location.substring(0, 10) + "..."
+                      : location}
+                  </p>
                 </div>
               </div>
               <div className="level-item has-text-centered">
@@ -84,7 +88,9 @@ const FullItem = (props) => {
                 <div>
                   <p className="heading">Contact</p>
                   <p className="title">
-                    <a href={"mailto:" + email}>{name}</a>
+                    <a href={"mailto:" + email}>
+                      {name.length > 10 ? name.substring(0, 10) + "..." : name}
+                    </a>
                   </p>
                 </div>
               </div>

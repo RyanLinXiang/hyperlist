@@ -107,6 +107,7 @@ class FormControl extends React.Component {
     }
 
     data.priceNegotiable = data.priceNegotiable ? true : false;
+    data.input = data.input.substring(0, 79);
 
     if (allRequiredFilled) {
       if (priceFormatValid) {
