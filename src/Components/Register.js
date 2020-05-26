@@ -7,14 +7,18 @@ const Register = (props) => {
     if (
       e.target.name.value &&
       e.target.email.value &&
-      e.target.password.value
+      e.target.password.value.length >= 6
     ) {
-      connectAPI("/user/register", "POST", {
-        name: e.target.name.value,
-        email: e.target.email.value,
-        password: e.target.password.value,
-      }).then((e) => {
-        console.log(e);
+      connectAPI(
+        "/user/register",
+        "POST",
+        {
+          name: e.target.name.value,
+          email: e.target.email.value,
+          password: e.target.password.value,
+        },
+        false
+      ).then((e) => {
         props.handler(false, false, false); //Sicherheitsstufe
       });
     }
@@ -48,7 +52,7 @@ const Register = (props) => {
           <input
             className="input"
             type="password"
-            placeholder="Password"
+            placeholder="Password (min. 6 chars.)"
             name="password"
           />
           <span className="icon is-small is-left">
@@ -63,7 +67,7 @@ const Register = (props) => {
           </button>{" "}
           <button
             className="button is-info"
-            onClick={props.handler.bind(this, false)}
+            onClick={props.handler.bind(this, false, false, false)}
           >
             Login
           </button>

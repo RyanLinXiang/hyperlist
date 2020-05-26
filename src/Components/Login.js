@@ -4,7 +4,11 @@ import connectAPI from "./api";
 const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (e.target.email.value && e.target.password.value) {
+    if (
+      e.target.email.value &&
+      e.target.password.value &&
+      e.target.password.value.length >= 6
+    ) {
       connectAPI("/user/login", "POST", {
         email: e.target.email.value,
         password: e.target.password.value,

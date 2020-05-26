@@ -54,6 +54,7 @@ class Items extends React.Component {
       userid,
       handlerForRefreshHomepage,
       messageItems,
+      view,
     } = this.props;
     const fullItem = this.state.fullItem ? this.state.fullItem : false;
     let colorclass, myAd;
@@ -62,7 +63,8 @@ class Items extends React.Component {
       colorclass = favAds.includes(fullItem.id) ? "yellow" : "grey";
       myAd = fullItem.userId === userid ? true : false;
     }
-    const showmessenger = fullItem.userId !== userid ? true : false;
+    const showmessenger =
+      fullItem.userId !== userid && view !== "messagesSent" ? true : false;
 
     return (
       <React.Fragment>
@@ -70,6 +72,8 @@ class Items extends React.Component {
           ? items.map((e) => {
               const colorclass = favAds.includes(e.id) ? "yellow" : "grey";
               const myAd = e.userId === userid ? true : false;
+              const showmessenger =
+                e.userId !== userid && view !== "messagesSent" ? true : false;
 
               if (!messageItems)
                 return (
@@ -93,7 +97,11 @@ class Items extends React.Component {
                     key={e.adId + e.latestMessage.createdAt}
                     messageText={e.latestMessage.text}
                     createdAt={e.latestMessage.createdAt}
-                    handler={this.handlerShowFull}
+                    senderUserId={e.latestMessage.senderUserId}
+                    handlerShowFull={this.handlerShowFull.bind(this, e.adId)}
+                    handlerForRefreshHomepage={handlerForRefreshHomepage}
+                    token={token}
+                    showmessenger={showmessenger}
                   />
                 );
             })
