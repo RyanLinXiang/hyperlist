@@ -10,10 +10,9 @@ import User from "./Components/User";
 
 class App extends React.Component {
   state = {
-    token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYzg5YjgxYWRhOGIxMDA0NDg1NjdmZCIsIm5hbWUiOiJMaW4iLCJpYXQiOjE1OTAyMDUzNDksImV4cCI6MTU5MDgxMDE0OX0.pB3pwP2bbQ2Q7sRwu9TmhcPYRziZshvY07s4Yej7qs0",
-    userid: "5ec89b81ada8b100448567fd",
-    username: "Lin",
+    token: false,
+    userid: false,
+    username: false,
     items: false,
   };
 
@@ -33,7 +32,7 @@ class App extends React.Component {
       helperData = this.currentAPIHelperData;
     }
 
-    if (view === "default") {
+    if (view === "default" || view === "ads") {
       extension =
         "ad/?filter=" + encodeURIComponent(JSON.stringify(helperData));
       type = "GET";
@@ -54,9 +53,9 @@ class App extends React.Component {
       else if (view === "messagesSent")
         e = e.filter((e) => e.latestMessage.senderUserId === this.state.userid);
 
-      this.setState({ items: e });
       this.currentAPIView = view;
       this.currentAPIHelperData = helperData;
+      this.setState({ items: e });
     });
   };
 
@@ -75,7 +74,11 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-        <Header />
+        <Header
+          handler={this.handlerShowItems.bind(this, "default", {
+            limit: 20,
+          })}
+        />
         <section className="section">
           <div className="container">
             <div className="columns is-centered">
@@ -105,6 +108,7 @@ class App extends React.Component {
                   username={username}
                   handlerUser={this.handlerUser}
                   handlerShowItems={this.handlerShowItems}
+                  currentAPIView={this.currentAPIView}
                 />
                 <p>&nbsp;</p>
                 <LocSearch handler={this.handlerShowItems} />

@@ -1,5 +1,6 @@
 import React from "react";
-const Header = () => {
+const Header = (props) => {
+  const handler = props.handler;
   return (
     <section
       className="hero is-link"
@@ -12,7 +13,9 @@ const Header = () => {
       <div className="hero-body">
         <div className="container">
           <h1 className="title">
-            <a href="http://localhost:3000">HyperList</a>
+            <a href="# " onClick={handler}>
+              HyperList
+            </a>
           </h1>
           <br />
           <h2 className="subtitle">by Osama | Ricky | Lin</h2>

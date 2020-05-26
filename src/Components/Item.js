@@ -27,7 +27,7 @@ const Item = (props) => {
         >
           read more
         </button>
-        {token ? (
+        {token && token !== "register" ? (
           <React.Fragment>
             <Favorite handlerToggleFav={handlerToggleFav} favcolor={favcolor} />
 

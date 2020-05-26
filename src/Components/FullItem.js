@@ -33,10 +33,12 @@ const FullItem = (props) => {
           <header className="modal-card-head">
             <div className="modal-card-title">
               {title}{" "}
-              <Favorite
-                handlerToggleFav={handlerToggleFav}
-                favcolor={favcolor}
-              />
+              {token && token !== "register" ? (
+                <Favorite
+                  handlerToggleFav={handlerToggleFav}
+                  favcolor={favcolor}
+                />
+              ) : null}
               <FormControl
                 id={id}
                 showeditbutton={showeditbutton}

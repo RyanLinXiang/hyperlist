@@ -1,21 +1,32 @@
 import React from "react";
 
 const UserFeatures = (props) => {
-  const { userid, username, handlerUser, handlerShowItems } = props;
+  const {
+    userid,
+    username,
+    handlerUser,
+    handlerShowItems,
+    currentAPIView,
+  } = props;
 
   const handlerUserFeature = (feature) => {
     if (feature === "ads") {
-      handlerShowItems("default", {
+      handlerShowItems("ads", {
         limit: 20,
         where: { userId: userid },
       });
-    } else if (feature === "favs") {
+    } else if (feature === "myfavs") {
       handlerShowItems("myfavs", false);
     } else if (feature === "messagesInbox") {
       handlerShowItems("messagesInbox", false);
     } else if (feature === "messagesSent") {
       handlerShowItems("messagesSent", false);
     }
+  };
+
+  const handlerLogout = () => {
+    handlerUser(false, false, false);
+    handlerUserFeature("default");
   };
 
   return (
@@ -25,12 +36,20 @@ const UserFeatures = (props) => {
         <p className="menu-label">Personal views:</p>
         <ul className="menu-list">
           <li>
-            <a href="# " onClick={handlerUserFeature.bind(this, "ads")}>
+            <a
+              href="# "
+              className={currentAPIView === "ads" ? "is-active" : null}
+              onClick={handlerUserFeature.bind(this, "ads")}
+            >
               my Ads
             </a>
           </li>
           <li>
-            <a href="# " onClick={handlerUserFeature.bind(this, "favs")}>
+            <a
+              href="# "
+              className={currentAPIView === "myfavs" ? "is-active" : null}
+              onClick={handlerUserFeature.bind(this, "myfavs")}
+            >
               my Favorites
             </a>
           </li>
@@ -39,6 +58,9 @@ const UserFeatures = (props) => {
         <ul className="menu-list">
           <li>
             <a
+              className={
+                currentAPIView === "messagesInbox" ? "is-active" : null
+              }
               href="# "
               onClick={handlerUserFeature.bind(this, "messagesInbox")}
             >
@@ -47,6 +69,7 @@ const UserFeatures = (props) => {
           </li>
           <li>
             <a
+              className={currentAPIView === "messagesSent" ? "is-active" : null}
               href="# "
               onClick={handlerUserFeature.bind(this, "messagesSent")}
             >
@@ -61,7 +84,7 @@ const UserFeatures = (props) => {
             className="button is-small has-background-grey"
             id="logout"
             type="button"
-            onClick={handlerUser.bind(this, false)}
+            onClick={handlerLogout}
           >
             Logout
           </button>

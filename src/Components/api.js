@@ -1,8 +1,6 @@
 const connectAPI = async (extension, type, data = "", token = false) => {
   const url = "https://awacademy-kleinanzeigen.azurewebsites.net/" + extension;
 
-  console.log(type, extension, data);
-
   const dataobj = {
     method: type,
     headers: {

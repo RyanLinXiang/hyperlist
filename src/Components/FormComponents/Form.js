@@ -98,7 +98,7 @@ const Form = (props) => {
             >
               Reset
             </button>
-            <Delete handler={handlerDelete} />
+            {token ? <Delete handler={handlerDelete} /> : null}
           </footer>
         </div>
       </div>
