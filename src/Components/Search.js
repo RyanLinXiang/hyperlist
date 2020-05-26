@@ -1,31 +1,23 @@
 import React from "react";
-import connectAPI from "./api";
 
-
-class Search extends React.Component {
-
-  handlerSubmit= (e)=> {
-    e.preventDefault()
-    let keyWord = e.target.search.value
+const Search =(props)=> {
+  var handlerSubmit = (e) => {
+    e.preventDefault();
+    let keyWord = e.target.search.value;
     var searchRequest = {
       limit: 20,
       offset: 0,
       where: {
-        and: [
-          { title: { like: keyWord, options: "i" } }
-
-
-        ]
-      }
+        and: [{ title: { like: keyWord, options: "i" } }
+      ]
+      },
     };
-   this.props.handler("default", searchRequest)
-   
-  }
+    props.handler("search", searchRequest);
+  };
 
-
-  render() {
+  
     return (
-      <form onSubmit={this.handlerSubmit}>
+      <form onSubmit={handlerSubmit}>
         <div className="box is-shadowless">
           <div className="field has-addons">
             <p className="control is-expanded">
@@ -37,15 +29,19 @@ class Search extends React.Component {
               />
             </p>
             <p className="control">
-              <button type="submit"  className="button is-link" id="search_submit">
+              <button
+                type="submit"
+                className="button is-link"
+                id="search_submit"
+              >
                 Search
-          </button>
+              </button>
             </p>
           </div>
         </div>
       </form>
     );
   }
-};
+
 
 export default Search;

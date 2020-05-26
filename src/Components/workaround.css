@@ -13,3 +13,17 @@
 .grey.favorite:hover {
   color: yellow;
 }
+
+.messenger form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.messenger div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -10,40 +10,52 @@ import User from "./Components/User";
 
 class App extends React.Component {
   state = {
-    token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYzg5YjgxYWRhOGIxMDA0NDg1NjdmZCIsIm5hbWUiOiJMaW4iLCJpYXQiOjE1OTAyMDUzNDksImV4cCI6MTU5MDgxMDE0OX0.pB3pwP2bbQ2Q7sRwu9TmhcPYRziZshvY07s4Yej7qs0",
-    userid: "5ec89b81ada8b100448567fd",
-    username: "Lin",
+    token: false,
+    userid: false,
+    username: false,
     items: false,
   };
 
   currentAPIView = "default";
   currentAPIHelperData = false;
+  messageItems = false;
 
   handlerShowItems = (view, helperData) => {
     let extension;
     let type;
     let token = this.state.token;
     let data = false;
+    this.messageItems = false;
 
     if (view === "current") {
       view = this.currentAPIView;
       helperData = this.currentAPIHelperData;
     }
 
-    if (view === "default") {
+    if (view === "default" || view === "ads" || view === "search") {
       extension =
         "ad/?filter=" + encodeURIComponent(JSON.stringify(helperData));
       type = "GET";
     } else if (view === "myfavs") {
       extension = "user/me/saved-ad";
       type = "GET";
+    } else if (view === "messagesInbox" || view === "messagesSent") {
+      extension = "user/me/conversations";
+      type = "GET";
+      this.messageItems = true;
     }
 
     connectAPI(extension, type, data, token).then((e) => {
-      this.setState({ items: e });
+      if (view === "messagesInbox")
+        e = e.filter(
+          (e) => e.latestMessage.recipientUserId === this.state.userid
+        );
+      else if (view === "messagesSent")
+        e = e.filter((e) => e.latestMessage.senderUserId === this.state.userid);
+
       this.currentAPIView = view;
       this.currentAPIHelperData = helperData;
+      this.setState({ items: e });
     });
   };
 
@@ -54,7 +66,7 @@ class App extends React.Component {
   render() {
     const { token, userid, username, items } = this.state;
 
-    if (!items.length) {
+    if (!items.length && this.currentAPIView === "default") {
       this.handlerShowItems("default", {
         limit: 20,
       });
@@ -62,7 +74,11 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-        <Header />
+        <Header
+          handler={this.handlerShowItems.bind(this, "default", {
+            limit: 20,
+          })}
+        />
         <section className="section">
           <div className="container">
             <div className="columns is-centered">
@@ -92,6 +108,7 @@ class App extends React.Component {
                   username={username}
                   handlerUser={this.handlerUser}
                   handlerShowItems={this.handlerShowItems}
+                  currentAPIView={this.currentAPIView}
                 />
                 <p>&nbsp;</p>
                 <LocSearch handler={this.handlerShowItems} />
@@ -106,6 +123,7 @@ class App extends React.Component {
                     "current",
                     this.currentAPIHelperData
                   )}
+                  messageItems={this.messageItems}
                 />
               </div>
             </div>

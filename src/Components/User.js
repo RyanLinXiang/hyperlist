@@ -4,7 +4,14 @@ import Login from "./Login";
 import UserFeatures from "./UserFeatures";
 
 const User = (props) => {
-  const { token, userid, username, handlerUser, handlerShowItems } = props;
+  const {
+    token,
+    userid,
+    username,
+    handlerUser,
+    handlerShowItems,
+    currentAPIView,
+  } = props;
 
   if (token === "register") return <Register handler={handlerUser} />;
   else if (token === false) return <Login handler={handlerUser} />;
@@ -16,6 +23,7 @@ const User = (props) => {
         handlerUser={handlerUser}
         handlerShowItems={handlerShowItems}
         token={token}
+        currentAPIView={currentAPIView}
       />
     );
 };
