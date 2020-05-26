@@ -32,7 +32,7 @@ class App extends React.Component {
       helperData = this.currentAPIHelperData;
     }
 
-    if (view === "default" || view === "ads") {
+    if (view === "default" || view === "ads" || view === "search") {
       extension =
         "ad/?filter=" + encodeURIComponent(JSON.stringify(helperData));
       type = "GET";
@@ -66,7 +66,7 @@ class App extends React.Component {
   render() {
     const { token, userid, username, items } = this.state;
 
-    if (!items.length) {
+    if (!items.length && this.currentAPIView === "default") {
       this.handlerShowItems("default", {
         limit: 20,
       });

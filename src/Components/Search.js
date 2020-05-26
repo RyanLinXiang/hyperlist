@@ -11,7 +11,7 @@ class Search extends React.Component {
         and: [{ title: { like: keyWord, options: "i" } }],
       },
     };
-    this.props.handler("default", searchRequest);
+    this.props.handler("search", searchRequest);
   };
 
   render() {
