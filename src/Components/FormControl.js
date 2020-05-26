@@ -64,7 +64,8 @@ class FormControl extends React.Component {
 
   handlerDelete = (event) => {
     const { id, token } = this.props;
-    connectAPI("ad/" + id, "DELETE", token).then((item) => {
+
+    connectAPI("ad/" + id, "DELETE", false, token).then((item) => {
       this.handlerToggleForm(true, true);
     });
   };
@@ -107,7 +108,7 @@ class FormControl extends React.Component {
     }
 
     data.priceNegotiable = data.priceNegotiable ? true : false;
-    data.input = data.input.substring(0, 79);
+    data.title = data.title.substring(0, 79);
 
     if (allRequiredFilled) {
       if (priceFormatValid) {
