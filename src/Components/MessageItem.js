@@ -13,9 +13,13 @@ const MessageItem = (props) => {
           className="button is-small"
           type="button"
         >
-          read full ad
-        </button>
-        <span className="tag is-light">{dayspast(createdAt) + " days"}</span>
+          Full Ad
+        </button>{" "}
+        <span className="tag is-light">
+          {dayspast(createdAt) > 1
+            ? dayspast(createdAt) + " days"
+            : dayspast(createdAt) + " day"}
+        </span>
       </div>
     </div>
   );

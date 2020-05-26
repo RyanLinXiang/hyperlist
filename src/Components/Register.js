@@ -3,7 +3,6 @@ import connectAPI from "./api";
 
 const Register = (props) => {
   const handleSubmit = (e) => {
-    alert("A name was submitted: ", e.target.name.value);
     e.preventDefault();
     if (
       e.target.name.value &&

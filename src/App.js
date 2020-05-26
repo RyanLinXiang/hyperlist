@@ -10,9 +10,10 @@ import User from "./Components/User";
 
 class App extends React.Component {
   state = {
-    token: false,
-    userid: false,
-    username: false,
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYzg5YjgxYWRhOGIxMDA0NDg1NjdmZCIsIm5hbWUiOiJMaW4iLCJpYXQiOjE1OTAyMDUzNDksImV4cCI6MTU5MDgxMDE0OX0.pB3pwP2bbQ2Q7sRwu9TmhcPYRziZshvY07s4Yej7qs0",
+    userid: "5ec89b81ada8b100448567fd",
+    username: "Lin",
     items: false,
   };
 
