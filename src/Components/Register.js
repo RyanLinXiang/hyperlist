@@ -1,37 +1,33 @@
 import React from "react";
 import connectAPI from "./api";
 
-class Register extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { name: '',email: '',password: ''  };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-    console.log(this.state);
-    console.log(event.target.name);
-  }
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state);
-    event.preventDefault();
-    connectAPI('/user/register', 'POST', this.state).then((e) => {
+const Register = (props) => {
+
+  const handleSubmit = (e) => {
+    alert('A name was submitted: ', e.target.name.value);
+    e.preventDefault();
+    if (e.target.name.value && e.target.email.value && e.target.password.value) {
+
+    connectAPI('/user/register', 'POST', {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+    }).then((e) => {
       console.log(e)
-      this.props.handler(false,false,false) //Sicherheitsstufe
+      props.handler(false,false,false) //Sicherheitsstufe
     });
-  }
-  render() {
+  }};
+
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="field">
           <div className="control">
-            <input className="input" type="text" placeholder="Name" name='name' value={this.state.name} onChange={this.handleChange} />
+            <input className="input" type="text" placeholder="Name" name='name' />
           </div>
         </div>
         <div className="field">
           <p className="control has-icons-left has-icons-right">
-            <input className="input" type="email" placeholder="Email" name='email' value={this.state.email} onChange={this.handleChange} />
+            <input className="input" type="email" placeholder="Email" name='email' />
             <span className="icon is-small is-left">
               <i className="fas fa-envelope"></i>
             </span>
@@ -42,7 +38,7 @@ class Register extends React.Component {
         </div>
         <div className="field">
           <p className="control has-icons-left">
-            <input className="input" type="password" placeholder="Password" name='password' value={this.state.password} onChange={this.handleChange} />
+            <input className="input" type="password" placeholder="Password" name='password' />
             <span className="icon is-small is-left">
               <i className="fas fa-lock"></i>
             </span>
@@ -55,7 +51,7 @@ class Register extends React.Component {
             </button>{" "}
             <button
               className="button is-info"
-              onClick={this.props.handler.bind(this, false)}
+              onClick={props.handler.bind(this, false)}
             >
               Login
             </button>
@@ -64,5 +60,4 @@ class Register extends React.Component {
       </form>
     );
   }
-}
 export default Register;
