@@ -1,7 +1,7 @@
 import React from "react";
 
-class LocSearch extends React.Component {
-  handlerChange = (e) => {
+const LocSearch =(props)=> {
+  var handlerChange = (e) => {
     let keyWord = e.target.value;
     var locationRequest = {
       limit: 20,
@@ -11,15 +11,15 @@ class LocSearch extends React.Component {
       },
     };
 
-    this.props.handler("search", locationRequest);
+    props.handler("search", locationRequest);
   };
 
-  render() {
+  
     return (
       <div className="menu sticky">
         <div className="control">
           <input
-            onChange={this.handlerChange}
+            onChange={handlerChange}
             className="input is-radiusless"
             type="text"
             id="search_loc"
@@ -29,6 +29,6 @@ class LocSearch extends React.Component {
       </div>
     );
   }
-}
+
 
 export default LocSearch;

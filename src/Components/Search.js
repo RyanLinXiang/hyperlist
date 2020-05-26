@@ -1,22 +1,24 @@
 import React from "react";
 
-class Search extends React.Component {
-  handlerSubmit = (e) => {
+const Search =(props)=> {
+  var handlerSubmit = (e) => {
     e.preventDefault();
     let keyWord = e.target.search.value;
     var searchRequest = {
       limit: 20,
       offset: 0,
       where: {
-        and: [{ title: { like: keyWord, options: "i" } }],
+        or: [{ title: { like: keyWord, options: "i" } },
+        {description: { like: keyWord, options: "i" } }
+      ]
       },
     };
-    this.props.handler("search", searchRequest);
+    props.handler("search", searchRequest);
   };
 
-  render() {
+  
     return (
-      <form onSubmit={this.handlerSubmit}>
+      <form onSubmit={handlerSubmit}>
         <div className="box is-shadowless">
           <div className="field has-addons">
             <p className="control is-expanded">
@@ -41,6 +43,6 @@ class Search extends React.Component {
       </form>
     );
   }
-}
+
 
 export default Search;
