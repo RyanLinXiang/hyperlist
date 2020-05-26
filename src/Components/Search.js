@@ -8,7 +8,8 @@ const Search =(props)=> {
       limit: 20,
       offset: 0,
       where: {
-        and: [{ title: { like: keyWord, options: "i" } }
+        or: [{ title: { like: keyWord, options: "i" } },
+        {description: { like: keyWord, options: "i" } }
       ]
       },
     };
