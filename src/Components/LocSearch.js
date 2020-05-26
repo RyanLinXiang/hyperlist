@@ -3,7 +3,8 @@ import connectAPI from "./api";
 
 
 class LocSearch extends React.Component {
-  handlerSubmit= (e)=> {
+
+  handlerSubmit = (e) => {
     e.preventDefault()
     let keyWord = e.target.value
     var locationRequest = {
@@ -17,39 +18,30 @@ class LocSearch extends React.Component {
         ]
       }
     };
-    
-   
-    this.props.handler("default", locationRequest)
-   
-  }
-   
-  Locations=()=>{
-   connectAPI("/ad", "GET").then(e =>{ 
-    let allLocations =[]
-    for (let i=0;i < e.length;i++) { 
-      allLocations.push(e[i].location)
-    } })
-    
-    
-  } 
- 
 
- 
-  render(){
-  return (
-    <div  className="menu sticky">
-      <div className="control">
-        <input
-          onChange= {this.handlerSubmit}
-          className="input is-radiusless"
-          type="text"
-          id="search_loc"
-          placeholder="Find location"
-        />
-        
+
+    this.props.handler("default", locationRequest)
+
+  }
+
+
+
+
+  render() {
+    return (
+      <div className="menu sticky">
+        <div className="control">
+          <input
+            onChange={this.handlerSubmit}
+            className="input is-radiusless"
+            type="text"
+            id="search_loc"
+            placeholder="Find location"
+          />
+        </div>
       </div>
-    </div>
-  );
-}};
+    );
+  }
+};
 
 export default LocSearch;
