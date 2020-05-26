@@ -11,7 +11,7 @@ const UserFeatures = (props) => {
 
   const handlerUserFeature = (feature) => {
     if (feature === "ads" || feature === "default") {
-      handlerShowItems("ads", {
+      handlerShowItems(feature, {
         limit: 20,
         where: { userId: userid },
       });
