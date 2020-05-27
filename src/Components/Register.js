@@ -4,23 +4,24 @@ import connectAPI from "./api";
 const Register = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      e.target.name.value &&
-      e.target.email.value &&
-      e.target.password.value.length >= 6
-    ) {
-      connectAPI(
-        "/user/register",
-        "POST",
-        {
-          name: e.target.name.value,
-          email: e.target.email.value,
-          password: e.target.password.value,
-        },
-        false
-      ).then((e) => {
-        props.handler(false, false, false, false); //Sicherheitsstufe
-      });
+    if (e.target.name.value && e.target.email.value) {
+      if (e.target.password.value.length >= 6) {
+        connectAPI(
+          "/user/register",
+          "POST",
+          {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            password: e.target.password.value,
+          },
+          false
+        ).then((e) => {
+          props.handler(false, false, false, false); 
+        });
+      } else {
+        props.handler(false, false, false, 'INCORRECT, please try it again!'); 
+
+      }
     }
   };
 

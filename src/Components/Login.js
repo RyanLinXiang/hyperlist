@@ -13,9 +13,13 @@ const Login = (props) => {
         email: e.target.email.value,
         password: e.target.password.value,
       }).then((e) => {
-        connectAPI("/user/me", "GET", false, e.token).then((element) => {
-          props.handler(e.token, element.id, element.name);
-        });
+        if(e.error){
+          props.handler(false,false, false, 'INCORRECT, please try it again!')
+        } else{
+          connectAPI("/user/me", "GET", false, e.token).then((element) => {
+            props.handler(e.token, element.id, element.name);
+          });
+        }
       });
     }
   };
