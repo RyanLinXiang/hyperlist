@@ -18,7 +18,7 @@ class Items extends React.Component {
 
   componentDidUpdate(prevProps) {
     const token = this.props.token;
-    if (token && prevProps.token !== this.props.token) {
+    if (token && token !== "register" && prevProps.token !== this.props.token) {
       connectAPI("user/me/saved-ad", "GET", false, token).then((e) => {
         if (e.length) {
           const favAds = e.map((fav) => fav.id);
