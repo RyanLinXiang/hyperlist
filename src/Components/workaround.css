@@ -1,8 +1,7 @@
 .yellow {
   color: yellow;
   background-color: #3273dc;
-  text-shadow: #fff 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px,
-    red 0 -18px 40px;
+  text-shadow: #fff 0 -1px 4px, #ff0 0 -2px 10px;
 }
 
 .grey {
@@ -18,8 +17,7 @@
 .grey.favorite:hover {
   color: yellow;
   background-color: #3273dc;
-  text-shadow: #fff 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px,
-    red 0 -18px 40px;
+  text-shadow: #fff 0 -1px 4px, #ff0 0 -2px 10px;
 }
 
 .messenger form {
