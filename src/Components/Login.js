@@ -60,7 +60,7 @@ const Login = (props) => {
           </button>{" "}
           <button
             className="button is-primary"
-            onClick={props.handler.bind(this, "register", false, false)}
+            onClick={props.handler.bind(this, "register", false, false, false)}
           >
             Register
           </button>

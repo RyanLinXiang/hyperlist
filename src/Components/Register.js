@@ -19,7 +19,7 @@ const Register = (props) => {
         },
         false
       ).then((e) => {
-        props.handler(false, false, false); //Sicherheitsstufe
+        props.handler(false, false, false, false); //Sicherheitsstufe
       });
     }
   };
@@ -67,7 +67,7 @@ const Register = (props) => {
           </button>{" "}
           <button
             className="button is-info"
-            onClick={props.handler.bind(this, false, false, false)}
+            onClick={props.handler.bind(this, false, false, false, false)}
           >
             Login
           </button>
