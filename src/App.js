@@ -7,6 +7,7 @@ import Items from "./Components/Items";
 import LocSearch from "./Components/LocSearch";
 import Search from "./Components/Search";
 import User from "./Components/User";
+import Message from "./Components/Message";
 
 class App extends React.Component {
   state = {
@@ -14,6 +15,7 @@ class App extends React.Component {
     userid: false,
     username: false,
     items: false,
+    error: false,
   };
   /*   state = {
     token:
@@ -66,13 +68,16 @@ class App extends React.Component {
     });
   };
 
-  handlerUser = (token, userid, username) => {
-    this.setState({
-      token: token,
-      userid: userid,
-      username: username,
-      items: false,
-    });
+  handlerUser = (token, userid, username, error = false) => {
+    if (!error) {
+      this.setState({
+        token: token,
+        userid: userid,
+        username: username,
+        items: false,
+        error: false,
+      });
+    } else this.setState({ error: error });
   };
 
   render() {
@@ -143,6 +148,13 @@ class App extends React.Component {
           </div>
         </section>
         <Footer />
+        {this.state.error ? (
+          <Message
+            handler={this.handlerUser.bind(this, false, false, false, false)}
+            classname="is-danger"
+            message={this.state.error}
+          />
+        ) : null}
       </React.Fragment>
     );
   }
