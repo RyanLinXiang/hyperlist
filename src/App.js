@@ -70,6 +70,7 @@ class App extends React.Component {
 
   handlerUser = (token, userid, username, error = false) => {
     if (!error) {
+      this.currentAPIView = "default";
       this.setState({
         token: token,
         userid: userid,

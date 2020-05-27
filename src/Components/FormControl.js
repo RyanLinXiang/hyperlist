@@ -49,7 +49,7 @@ class FormControl extends React.Component {
     if (closeform) this.handlerToggleForm(closeAdPage, refreshHomePage);
   };
 
-  handlerReset = (event) => {
+  handlerReset = () => {
     const formContents = [...this.state.formContents];
     formContents.forEach((e) => (e.value = ""));
     this.setState({ formContents: formContents });
@@ -66,6 +66,7 @@ class FormControl extends React.Component {
     const { id, token } = this.props;
 
     connectAPI("ad/" + id, "DELETE", false, token).then((item) => {
+      this.handlerReset();
       this.handlerToggleForm(true, true);
     });
   };
@@ -121,6 +122,7 @@ class FormControl extends React.Component {
         }
 
         connectAPI(urlExtension, method, data, token).then((e) => {
+          this.handlerReset();
           this.handlerFeedback(
             false,
             `Your ad has been successfully ${

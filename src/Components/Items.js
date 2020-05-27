@@ -64,7 +64,9 @@ class Items extends React.Component {
       myAd = fullItem.userId === userid ? true : false;
     }
     const showmessenger =
-      fullItem.userId !== userid && view !== "messagesSent" ? true : false;
+      fullItem.userId !== userid && view !== "messagesSent" && token
+        ? true
+        : false;
 
     return (
       <React.Fragment>
@@ -73,7 +75,9 @@ class Items extends React.Component {
               const colorclass = favAds.includes(e.id) ? "yellow" : "grey";
               const myAd = e.userId === userid ? true : false;
               const showmessenger =
-                e.userId !== userid && view !== "messagesSent" ? true : false;
+                e.userId !== userid && view !== "messagesSent" && token
+                  ? true
+                  : false;
 
               if (!messageItems)
                 return (

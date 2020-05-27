@@ -22,7 +22,7 @@ const Login = (props) => {
           props.handler(false, false, false, "INCORRECT, please try it again!");
         } else {
           connectAPI("/user/me", "GET", false, e.token).then((element) => {
-            props.handler(e.token, element.id, element.name);
+            props.handler(e.token, element.id, element.name, false);
           });
         }
       });
