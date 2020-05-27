@@ -9,13 +9,18 @@ const Login = (props) => {
       e.target.password.value &&
       e.target.password.value.length >= 6
     ) {
-      connectAPI("/user/login", "POST", {
-        email: e.target.email.value,
-        password: e.target.password.value,
-      }).then((e) => {
-        if(e.error){
-          props.handler(false,false, false, 'INCORRECT, please try it again!')
-        } else{
+      connectAPI(
+        "/user/login",
+        "POST",
+        {
+          email: e.target.email.value,
+          password: e.target.password.value,
+        },
+        false
+      ).then((e) => {
+        if (e.error) {
+          props.handler(false, false, false, "INCORRECT, please try it again!");
+        } else {
           connectAPI("/user/me", "GET", false, e.token).then((element) => {
             props.handler(e.token, element.id, element.name);
           });
