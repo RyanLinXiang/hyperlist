@@ -26,11 +26,10 @@ const Item = (props) => {
           type="button"
         >
           read more
-        </button>
+        </button>{" "}
         {token && token !== "register" ? (
           <React.Fragment>
-            <Favorite handlerToggleFav={handlerToggleFav} favcolor={favcolor} />
-
+            <Favorite handlerToggleFav={handlerToggleFav} favcolor={favcolor} />{" "}
             <FormControl
               id={id}
               handlerForRefreshHomepage={handlerForRefreshHomepage}
