@@ -8,7 +8,7 @@
 
 Below you can find an example of "HyperList" running. It shows how to open a full-item view, to mark an ad as favorite and to open the favorite view.
 
-![mySkin screens](public/overview-animated.gif)
+![mySkin screens](public/addentry-animated.gif)
 
 ### Dependencies
 
