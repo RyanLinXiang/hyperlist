@@ -49,7 +49,7 @@ class MessageItem extends React.Component {
               className="button is-small"
               type="button"
             >
-              &#8618;
+              &#8618; {senderUserName}
             </button>
           ) : null}{" "}
           <span className="tag is-light">
